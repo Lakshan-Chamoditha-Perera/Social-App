@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import {Button, Card} from "@mui/material";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchComments} from "../redux/commentsSlice";
+import Comment from "./Comment";
 
 const Post = ({post}) => {
     const dispatch = useDispatch();
@@ -17,7 +18,7 @@ const Post = ({post}) => {
         setShowComments(false);
     };
 
-    return (<Card className=" w-[350px] min-h-[200px] m-4 border border-gray-300 rounded-lg shadow-lg" key={post.id}>
+    return (<Card className=" w-[450px] min-h-[200px] m-4 border border-gray-300 rounded-lg shadow-lg" key={post.id}>
         {/* Card body */}
         <div className="p-4 flex flex-col justify-between">
             <h1 className="text-2xl font-bold">{post.title}</h1>
@@ -33,17 +34,13 @@ const Post = ({post}) => {
             {showComments ? (<div className="mt-4">
                 <h2 className="text-xl font-bold">Comments</h2>
                 <ul>
-                    {postComments.length > 0 ? (postComments.map((comment) => (
-                        <li key={comment.id} className="mb-2">
-                        <div className="p-2 border border-gray-200 rounded">
-                            <p>{comment.content}</p>
-                            <Button variant="outlined" size="small">Reply</Button>
-                        </div>
-                        </li>
-                    ))) : <li>No comments yet !</li>}
+                    {postComments.length > 0 ? (postComments.map((comment) => (<li key={comment.id} className="mb-2">
+                        <Comment comment={comment}/>
+                    </li>))) : <li
+                        className={'text-red-400 rounded p-2'}
+                    >No comments yet !</li>}
                 </ul>
-            </div>) : <></>
-            }
+            </div>) : <></>}
         </div>
     </Card>);
 };

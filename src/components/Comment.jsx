@@ -1,20 +1,13 @@
 import React from 'react';
+import {Button} from "@mui/material";
 
-const Comment = ({ comment }) => {
-    return (
-        <div className="p-4 m-4 border border-gray-300 rounded-lg shadow-lg">
-            <h2 className="text-lg font-bold">Comment</h2>
-            <p className="mb-2">{comment.content}</p>
-            <h3 className="text-md font-semibold">Replies</h3>
-            <ul className="ml-4">
-                {comment.replies.map(reply => (
-                    <li key={reply.id} className="mb-2">
-                        <p className="p-2 border border-gray-200 rounded">{reply.content}</p>
-                    </li>
-                ))}
-            </ul>
+const Comment = ({comment}) => {
+    return (<div className="p-3 border-gray-300 border m-4 rounded-lg shadow-lg">
+        <div className="border-gray-200 rounded">
+            <p>{comment.content}</p>
+            <Button variant="outlined" size="small">Reply</Button>
         </div>
-    );
+    </div>);
 };
 
 export default Comment;
