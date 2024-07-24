@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 export const fetchComments = createAsyncThunk('comments/fetchComments', async (postId) => {
-    const response = await axios.get(`/comments?postId=${postId}`);
+    const response = await axios.get(`http://localhost:8001/comments?postId=${postId}`);
     return response.data;
 });
 
