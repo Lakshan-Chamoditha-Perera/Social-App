@@ -11,7 +11,7 @@ const Post = ({post}) => {
 
     const loadComments = async () => {
         setShowComments(true);
-        dispatch(fetchComments());
+        dispatch(fetchComments(post.id));
     };
 
     const hideComments = () => {

@@ -21,16 +21,12 @@ const Wall = () => {
     if (postStatus === "loading") {
         content = <p>Loading...</p>;
     } else if (postStatus === "succeeded") {
-
-        toast.success("Posts loaded successfully!", {
-            hideProgressBar: false, closeOnClick: true, pauseOnHover: true, theme: "dark", transition: Bounce,
-        });
-
         content = (<ul>
             {posts.map((post) => (<li key={post.id}>
                 <Post post={post}/>
             </li>))}
         </ul>);
+
     } else if (postStatus === "failed") {
 
         toast.error('Something went wrong!', {
