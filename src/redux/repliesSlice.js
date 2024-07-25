@@ -5,7 +5,7 @@ import {toast} from 'react-toastify';
 export const fetchReplies = createAsyncThunk('replies/fetchReplies', async (commentId, thunkAPI) => {
     try {
         toast.success('fetchReplies: comment id ' + commentId);
-        const response = await axios.get(`http://localhost:8001/comments/${commentId}`);
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/comments/${commentId}`);
         const comment = response.data;
         return comment.replies && Array.isArray(comment.replies) ? comment.replies : [];
     } catch (error) {
