@@ -10,6 +10,5 @@ This is a simple blog application built with React for the frontend and a JSON s
 
 ## Installation
 - Include url - REACT_APP_API_URL=http://localhost:3001 in .env file
-- Run JSON server on port 3001 - npx json-server --watch data/db.json --port 3001
 - Run npm install
 - Run npm start
