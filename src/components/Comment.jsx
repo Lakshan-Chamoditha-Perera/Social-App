@@ -1,9 +1,8 @@
 import React, {useState} from 'react';
-import {Button, Card} from "@mui/material";
+import {Button} from "@mui/material";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchReplies} from "../redux/repliesSlice";
 import Reply from "./Reply";
-import {toast} from "react-toastify";
 
 const Comment = ({comment}) => {
     const dispatch = useDispatch();
@@ -17,7 +16,7 @@ const Comment = ({comment}) => {
         setShowReplies(!showReplies);
     };
 
-    return (<Card className=" min-h-[100px] m-4 border border-gray-300 rounded-lg shadow-lg" key={comment.id}>
+    return (<div className="min-h-[100px] hover:scale-105 transition duration-300 ease-in-out m-2 border border-gray-300 rounded-lg shadow-lg" key={comment.id}>
         <div className="p-4 flex flex-col justify-between">
             <p>{comment.content}</p>
             <div>
@@ -37,7 +36,7 @@ const Comment = ({comment}) => {
                 </ul>
             </div>)}
         </div>
-    </Card>);
+    </div>);
 };
 
 export default Comment;

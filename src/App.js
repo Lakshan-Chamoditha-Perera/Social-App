@@ -1,10 +1,10 @@
 import { createBrowserRouter, RouterProvider, } from "react-router-dom";
+import { store } from "./redux/store";
+import { Provider } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 import Login from "./views/signin/Login";
-import { store } from "./redux/store";
-import { Provider } from 'react-redux';
 import Wall from "./views/wall/Wall";
 
 const router = createBrowserRouter([

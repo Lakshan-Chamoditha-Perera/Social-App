@@ -4,23 +4,19 @@ import {toast} from 'react-toastify';
 
 export const login = createAsyncThunk('user/login', async (credentials, thunkAPI) => {
     try {
-        console.log(credentials);
-
         const response = await axios.get(`${process.env.REACT_APP_API_URL}/user?email=${credentials.email}`);
         const user = response.data[0];
-        console.log(user);
+
         if (!user) {
             throw new Error('User not found');
         }
 
-        // Assuming user object has a password property for simplicity
         if (user.password !== credentials.password) {
             throw new Error('Incorrect password');
         }
 
         return user;
     } catch (error) {
-        toast.error('Failed to login: ' + error.message);
         return thunkAPI.rejectWithValue(error.message);
     }
 });
