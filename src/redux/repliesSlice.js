@@ -1,10 +1,20 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 export const fetchReplies = createAsyncThunk('replies/fetchReplies', async (commentId) => {
+    toast('fetchReplies: comment id ' + commentId);
     const response = await axios.get(`http://localhost:8001/comments/${commentId}`);
-    return response.data;
+    const comment = response.data;
+    const replies = comment.replies && Array.isArray(comment.replies) ? comment.replies : [];
+    return replies;
 });
+
+
+const setReplies = (list, replies) => {
+    const filteredList = list.filter(item => !replies.some(reply => reply.commentId === item.commentId));
+    return [...filteredList, ...replies];
+};
 
 const repliesSlice = createSlice({
     name: 'replies',
@@ -21,7 +31,7 @@ const repliesSlice = createSlice({
             })
             .addCase(fetchReplies.fulfilled, (state, action) => {
                 state.status = 'succeeded';
-                state.items = action.payload;
+                state.items = setReplies(state.items, action.payload);
             })
             .addCase(fetchReplies.rejected, (state, action) => {
                 state.status = 'failed';

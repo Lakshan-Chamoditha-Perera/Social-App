@@ -1,10 +1,11 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import axios from 'axios';
+import {toast} from "react-toastify";
 
 export const fetchComments = createAsyncThunk('comments/fetchComments', async (postId) => {
-    console.log('fetchComments ' + postId);
-    const response = await axios.get(`http://localhost:8001/comments?postId=${postId}`);
-    return response.data;
+        toast('fetchComments post no: ' + postId);
+        const response = await axios.get(`http://localhost:8001/comments?postId=${postId}`);
+        return response.data;
 });
 
 const setItems = (list, comments) => {
