@@ -3,12 +3,12 @@ import {Button, Card} from "@mui/material";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchReplies} from "../redux/repliesSlice";
 import Reply from "./Reply";
+import {toast} from "react-toastify";
 
 const Comment = ({comment}) => {
     const dispatch = useDispatch();
     const [showReplies, setShowReplies] = useState(false);
     const commentReplies = useSelector((state) => state.replies.items)?.filter(r => r.commentId == comment.id);
-
 
     const toggleReplies = () => {
         if (!showReplies) {

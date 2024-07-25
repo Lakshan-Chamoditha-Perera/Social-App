@@ -1,15 +1,18 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import axios from 'axios';
-import { toast } from 'react-toastify';
+import {toast} from 'react-toastify';
 
-export const fetchReplies = createAsyncThunk('replies/fetchReplies', async (commentId) => {
-    toast('fetchReplies: comment id ' + commentId);
-    const response = await axios.get(`http://localhost:8001/comments/${commentId}`);
-    const comment = response.data;
-    const replies = comment.replies && Array.isArray(comment.replies) ? comment.replies : [];
-    return replies;
+export const fetchReplies = createAsyncThunk('replies/fetchReplies', async (commentId, thunkAPI) => {
+    try {
+        toast.success('fetchReplies: comment id ' + commentId);
+        const response = await axios.get(`http://localhost:8001/comments/${commentId}`);
+        const comment = response.data;
+        return comment.replies && Array.isArray(comment.replies) ? comment.replies : [];
+    } catch (error) {
+        toast.error('Failed to fetch replies: ' + error.message);
+        throw error;
+    }
 });
-
 
 const setReplies = (list, replies) => {
     const filteredList = list.filter(item => !replies.some(reply => reply.commentId === item.commentId));
@@ -17,17 +20,13 @@ const setReplies = (list, replies) => {
 };
 
 const repliesSlice = createSlice({
-    name: 'replies',
-    initialState: {
-        items: [],
-        status: 'idle',
-        error: null,
-    },
-    reducers: {},
-    extraReducers: (builder) => {
+    name: 'replies', initialState: {
+        items: [], status: 'idle', error: null,
+    }, reducers: {}, extraReducers: (builder) => {
         builder
             .addCase(fetchReplies.pending, (state) => {
                 state.status = 'loading';
+                state.error = null;
             })
             .addCase(fetchReplies.fulfilled, (state, action) => {
                 state.status = 'succeeded';
@@ -35,7 +34,7 @@ const repliesSlice = createSlice({
             })
             .addCase(fetchReplies.rejected, (state, action) => {
                 state.status = 'failed';
-                state.error = action.error.message;
+                state.error = action.error.message; // Store the error message
             });
     },
 });

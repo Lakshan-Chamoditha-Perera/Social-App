@@ -3,13 +3,17 @@ import axios from 'axios';
 import {toast} from "react-toastify";
 
 export const fetchComments = createAsyncThunk('comments/fetchComments', async (postId) => {
-        toast('fetchComments post no: ' + postId);
+    try {
+        toast.success('fetchComments post no: ' + postId);
         const response = await axios.get(`http://localhost:8001/comments?postId=${postId}`);
-        return response.data;
+        return response.data && Array.isArray(response.data) ? response.data : [];
+    } catch (error) {
+        toast.error('Failed to fetch comments: ' + error.message);
+        throw error;
+    }
 });
 
 const setItems = (list, comments) => {
-    console.log(comments)
     const filteredList = list.filter(item => item.postId !== comments[0]?.postId);
     return [...filteredList, ...comments];
 }

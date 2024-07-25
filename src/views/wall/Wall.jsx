@@ -28,16 +28,13 @@ const Wall = () => {
         </ul>);
 
     } else if (postStatus === "failed") {
-
         toast.error('Something went wrong!', {
             hideProgressBar: false, closeOnClick: true, pauseOnHover: true, theme: "dark", transition: Bounce,
         });
         content = <p>{error}</p>;
     }
 
-    return (<div
-        className={"border border-black flex flex-col items-center justify-center"}
-    >
+    return (<div className={"border border-black flex flex-col items-center justify-center"}>
         <h1 className={"text-4xl mt-3 font-bold"}>Wall</h1>
         {content}
     </div>);
