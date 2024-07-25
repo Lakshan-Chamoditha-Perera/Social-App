@@ -18,7 +18,7 @@ const Post = ({post}) => {
         setShowComments(false);
     };
 
-    return (<Card className=" min-w-[450px] min-h-[200px] m-4 border border-gray-300 rounded-lg shadow-lg" key={post.id}>
+    return (<div className=" min-w-[450px] min-h-[200px] m-4 border border-gray-300 rounded-lg shadow-lg" key={post.id}>
             {/* Card body */}
             <div className="p-4 flex flex-col justify-between">
                 <h1 className="text-2xl font-bold">{post.title}</h1>
@@ -42,7 +42,7 @@ const Post = ({post}) => {
 
                 </div>) : <></>}
             </div>
-        </Card>);
+        </div>);
 };
 
 export default Post;

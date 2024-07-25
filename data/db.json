@@ -101,7 +101,6 @@
       "content": "This is the content of post 20"
     }
   ],
-
   "comments": [
     {
       "id": 1,
@@ -297,7 +296,6 @@
       "replies": []
     }
   ],
-
   "user": [
     {
       "id": 1,
