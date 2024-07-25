@@ -2,15 +2,14 @@
 
 This is a simple blog application built with React for the frontend and a JSON server for the backend. The application allows users to view a list of blog posts, view individual blog posts, and create new blog posts.
 
-## Features
-
-- View a list of blog posts
-- View individual blog posts
-- Create new blog posts
-
 ## Prerequisites
 
 - Node.js (v12 or later)
 - npm (v6 or later)
 - JSON Server (installed globally)
 
+## Installation
+- Include url - REACT_APP_API_URL=http://localhost:3001 in .env file
+- Run JSON server on port 3001 - npx json-server --watch data/db.json --port 3001
+- Run npm install
+- Run npm start
